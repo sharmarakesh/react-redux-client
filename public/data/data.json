@@ -1,0 +1,5 @@
+[
+    {"id": 1, "firstName": "Rakesh", "lastName": "Sharma", "phoneNumbers": [11111,2222222,333333,44444]},
+    {"id": 2, "firstName": "Mit", "lastName": "Patel", "phoneNumbers": [11111,2222222,333333,44444]},
+    {"id": 3, "firstName": "Ritesh", "lastName": "Chawan", "phoneNumbers": [11111,2222222,333333,44444]}
+]
