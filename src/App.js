@@ -15,6 +15,7 @@ import {ConnectedRouter} from 'react-router-redux';
 // eslint-disable-next-line
 import Appp from './containers/App';
 import UserInformation from './containers/UserInformation';
+import MaterialUITable from './containers/MaterialUITable';
 
 const store = configureStore();
 // eslint-disable-next-line
@@ -34,20 +35,24 @@ class App extends Component {
             background: "#f0f0f0"
           }}
         >
-          <ul style={{ listStyleType: "none", padding: 0 }}>
+          <ul style={{ listStyleType: "none", padding: 0, display: "flex", justifyContent: 'flex-end'}}>
             {/* <li>
               <Link to="/">Home</Link>
             </li> */}
-            <li>
+            <li style={{padding: "10px", backgroundColor: "#ccc", margin: "5px"}}>
               <Link to="/userInfo">UserInfo</Link>
             </li>
-  
+            <li style={{padding: "10px", backgroundColor: "#ccc", margin: "5px"}}>
+              <Link to="/tableExample">Material UI Table Example</Link>
+            </li>
           </ul>
 
             {/* <Route path="/" exact={true} component={Appp} /> */}
             
             <div className="content">
             <Route path="/userInfo" exact={true} component={UserInformation} />
+            <Route path="/tableExample" exact={true} component={MaterialUITable} />
+            
             </div>
         </div>
         
