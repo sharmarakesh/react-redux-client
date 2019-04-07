@@ -10,7 +10,13 @@ const INITIAL_STATE = {
     rowsPerPage: 5,
     isFetching: false,
     isFetched: false,
-    error: null
+    error: null,
+    startDate: {
+        selectedStartDate: new Date(),
+    },
+    endDate: {
+        selectedEndDate: new Date(),
+    }
 }
 
 export const materialUITableReducer = (currentState = INITIAL_STATE, action) => {
@@ -29,6 +35,9 @@ export const materialUITableReducer = (currentState = INITIAL_STATE, action) => 
 
         case 'CHANGE_ROWS_PER_PAGE':
             return {...currentState, page: action.payload.page, rowsPerPage: action.payload.rowsPerPage}
+        
+        case 'CHANGE_START_DATE':
+            return {...currentState, startDate: {startDate: action.payload.date}}
 
         default:
         return currentState;

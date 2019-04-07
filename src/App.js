@@ -15,6 +15,7 @@ import {ConnectedRouter} from 'react-router-redux';
 // eslint-disable-next-line
 import Appp from './containers/App';
 import UserInformation from './containers/UserInformation';
+
 import MaterialUITable from './containers/MaterialUITable';
 
 const store = configureStore();
@@ -25,6 +26,8 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
+      
+      
         <div>
         <Router>
       <div style={{ display: "flex" }}>
@@ -59,7 +62,6 @@ class App extends Component {
       </div>
     </Router>
         </div>
-        
       </Provider>
     );
   }

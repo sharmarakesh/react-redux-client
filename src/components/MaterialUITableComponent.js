@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -13,6 +13,10 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
+// import 'date-fns';
+// import { MuiPickersUtilsProvider } from 'material-ui-pickers';
+// import DateFnsUtils from "@date-io/date-fns";
+import KeyboardDatePicker from './KeyboardDatePicker';
 
 const actionsStyles = theme => ({
     root: {
@@ -41,6 +45,7 @@ const actionsStyles = theme => ({
         Math.max(0, Math.ceil(this.props.count / this.props.rowsPerPage) - 1),
       );
     };
+    
   
     render() {
       const { classes, count, page, rowsPerPage, theme } = this.props;
@@ -119,15 +124,58 @@ const actionsStyles = theme => ({
     handleChangeRowsPerPage = event => {
         this.props.changeRowsPerPage(0, +event.target.value);
     };
+
+    handleDateChange = (date) => {
+      // this.setState({ selectedDate: date });
+      console.log(date);
+      this.props.startDateChange(date);
+    };
   
     render() {
       const { classes } = this.props;
-      const { tablesData, rowsPerPage, page } = this.props.mappedTableState;
+      const { tablesData, rowsPerPage, page, startDate } = this.props.mappedTableState;
       const rows = tablesData;
       const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
     
       return (
         <Paper className={classes.root}>
+        
+        {/* <KeyboardDatePicker></KeyboardDatePicker> */}
+        
+        {/* <Fragment>
+      <div className="picker">
+        <DatePicker
+          keyboard
+          clearable
+          label="Start Date"
+          value={startDate.selectedStartDate}
+          onChange={this.props.handleDateChange}
+          animateYearScrolling={false}
+          minDate={new Date()}
+          onInputChange={e => console.log("Keyboard Input:", e.target.value)}
+        />
+      </div> */}
+
+      {/* <div className="picker">
+        <DatePicker
+          keyboard
+          label="Masked input"
+          format={props.getFormatString({
+            moment: "MM/DD/YYYY",
+            dateFns: "MM/dd/yyyy",
+          })}
+          placeholder="10/10/2018"
+          mask={value =>
+            // handle clearing outside if value can be changed outside of the component
+            value ? [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/] : []
+          }
+          value={selectedDate}
+          onChange={handleDateChange}
+          disableOpenOnEnter
+          animateYearScrolling={false}
+        />
+      </div> */}
+    {/* </Fragment> */}
           <div className={classes.tableWrapper}>
             <Table className={classes.table}>
               <TableBody>
