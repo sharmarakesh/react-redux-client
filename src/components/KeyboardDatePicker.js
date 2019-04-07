@@ -1,89 +1,46 @@
-import React, { Fragment, useState } from "react";
+import 'date-fns';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 import DateFnsUtils from '@date-io/date-fns';
-import MomentUtils from '@date-io/moment';
-import { InlineDateTimePicker } from "material-ui-pickers";
-import { DateRangePicker } from 'material-ui-datetime-range-picker';
-import {
-  MuiPickersUtilsProvider,
-  DatePicker,
-  TimePicker,
-  DateTimePicker,
-  InlineDatePicker
-} from "material-ui-pickers";
+import Grid from '@material-ui/core/Grid';
+import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers';
 
-function KeyboardDatePicker(props) {
-  const [selectedDate, handleDateChange] = useState(new Date());
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+  },
+});
+
+function DatePickers(props) {
+  const { classes } = props;
 
   return (
-    // <Fragment>
-    //   <div className="picker">
-    //     <DatePicker
-    //       keyboard
-    //       clearable
-    //       label="Uncontrolled input"
-    //       value={selectedDate}
-    //       onChange={handleDateChange}
-    //       animateYearScrolling={false}
-    //       minDate={new Date()}
-    //       onInputChange={e => console.log("Keyboard Input:", e.target.value)}
-    //     />
-    //   </div>
-
-    //   <div className="picker">
-        
-    //   </div>
-    // </Fragment>
-    // <MuiPickersUtilsProvider utils={DateFnsUtils}>
-    //   <div className="picker">
-    //     <InlineDateTimePicker
-    //       keyboard
-    //       ampm={false}
-    //       label="With keyboard"
-    //       value={selectedDate}
-    //       onChange={handleDateChange}
-    //       onError={console.log}
-    //       disablePast
-    //       format={props.getFormatString({
-    //         moment: "YYYY/MM/DD hh:mm A",
-    //         dateFns: "yyyy/MM/dd HH:mm",
-    //       })}
-    //       mask={[
-    //         /\d/,
-    //         /\d/,
-    //         /\d/,
-    //         /\d/,
-    //         "/",
-    //         /\d/,
-    //         /\d/,
-    //         "/",
-    //         /\d/,
-    //         /\d/,
-    //         " ",
-    //         /\d/,
-    //         /\d/,
-    //         ":",
-    //         /\d/,
-    //         /\d/,
-    //       ]}
-    //     />
-        
-    //   </div>
-    // </MuiPickersUtilsProvider>
-    <DateRangePicker
-    autoOk={true}
-    autoOpenField={true}
-    showCalendarStatus={true}
-    className="my-date-picker"
-    firstDayOfWeek={0}
-    dayButtonSize="6.25vw"
-    calendarDateWidth="80vw"
-    calendarTimeWidth="40vw"
-    local='en-US'
-    mode='portrait'
-    startLabel='Beginning'
-    endLabel='Ending'
-/>
+    <form className={classes.container} noValidate>
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <Grid container className={classes.grid} justify="space-around">
+          <DatePicker
+            margin="normal"
+            value={props.selectedDate}  
+            onChange={props.changed}
+            keyboard
+            format="MM/dd/yyyy"
+            mask={value => (value ? [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/] : [])}
+          />
+        </Grid>
+      </MuiPickersUtilsProvider>    
+    </form>
   );
 }
 
-export default KeyboardDatePicker;
+DatePickers.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(DatePickers);

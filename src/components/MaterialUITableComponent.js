@@ -13,10 +13,6 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
-// import 'date-fns';
-// import { MuiPickersUtilsProvider } from 'material-ui-pickers';
-// import DateFnsUtils from "@date-io/date-fns";
-import KeyboardDatePicker from './KeyboardDatePicker';
 
 const actionsStyles = theme => ({
     root: {
@@ -139,43 +135,7 @@ const actionsStyles = theme => ({
     
       return (
         <Paper className={classes.root}>
-        
-        {/* <KeyboardDatePicker></KeyboardDatePicker> */}
-        
-        {/* <Fragment>
-      <div className="picker">
-        <DatePicker
-          keyboard
-          clearable
-          label="Start Date"
-          value={startDate.selectedStartDate}
-          onChange={this.props.handleDateChange}
-          animateYearScrolling={false}
-          minDate={new Date()}
-          onInputChange={e => console.log("Keyboard Input:", e.target.value)}
-        />
-      </div> */}
 
-      {/* <div className="picker">
-        <DatePicker
-          keyboard
-          label="Masked input"
-          format={props.getFormatString({
-            moment: "MM/DD/YYYY",
-            dateFns: "MM/dd/yyyy",
-          })}
-          placeholder="10/10/2018"
-          mask={value =>
-            // handle clearing outside if value can be changed outside of the component
-            value ? [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/] : []
-          }
-          value={selectedDate}
-          onChange={handleDateChange}
-          disableOpenOnEnter
-          animateYearScrolling={false}
-        />
-      </div> */}
-    {/* </Fragment> */}
           <div className={classes.tableWrapper}>
             <Table className={classes.table}>
               <TableBody>
