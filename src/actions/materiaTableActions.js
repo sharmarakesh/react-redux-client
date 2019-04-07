@@ -48,3 +48,10 @@ export const changeRowsPerPage = ( page, rowsPerPage ) => {
         payload: {page: page, rowsPerPage: rowsPerPage}
     }
 }
+
+export const changeStartDate = ( date ) => {
+    return  {
+        type: 'CHANGE_START_DATE',
+        payload: {date: date}
+    }
+}

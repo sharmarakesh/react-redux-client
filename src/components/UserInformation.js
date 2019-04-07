@@ -5,9 +5,22 @@ import { Table } from 'react-bootstrap';
 
 export default class UserInformation extends React.Component {
     
+  // let blockedDateTimeRanges = [
+  //   {
+  //     start: new Date('2018-11-06 08:00:00'),
+  //     end: new Date('2018-11-06 20:00:00')
+  //   },
+  //   {
+  //     start: new Date('2020-11-03 08:00:00'),
+  //     end: new Date('2020-11-03 20:00:00')
+  //   }
+  // ];
+
   componentDidMount(){
     this.props.fetchUserInformation();
   }
+
+  
 
   render(){
     const userInformationState = this.props.mappedUserInformationState;

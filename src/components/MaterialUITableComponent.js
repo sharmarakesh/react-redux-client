@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
+import TableHead from '@material-ui/core/TableHead';
 import TableCell from '@material-ui/core/TableCell';
 import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
@@ -41,6 +42,7 @@ const actionsStyles = theme => ({
         Math.max(0, Math.ceil(this.props.count / this.props.rowsPerPage) - 1),
       );
     };
+    
   
     render() {
       const { classes, count, page, rowsPerPage, theme } = this.props;
@@ -119,14 +121,37 @@ const actionsStyles = theme => ({
     handleChangeRowsPerPage = event => {
         this.props.changeRowsPerPage(0, +event.target.value);
     };
+
+    handleDateChange = (date) => {
+      // this.setState({ selectedDate: date });
+      console.log(date);
+      this.props.startDateChange(date);
+    };
   
     render() {
       const { classes } = this.props;
-      const { tablesData, rowsPerPage, page } = this.props.mappedTableState;
+      const { tablesData, rowsPerPage, page, startDate } = this.props.mappedTableState;
       const rows = tablesData;
       const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
     
       return (
+        
+      <div>
+        <Paper className={classes.root} style={{ marginTop: '-38px', backgroundColor: '#585eb1', boxShadow: 'none'}}>
+          <div className={classes.tableWrapper}>
+            <Table className={classes.table}>
+                <TableHead>
+                  <TableRow>
+                    <TableCell style={{color: 'white'}}>ID #</TableCell>
+                    <TableCell style={{color: 'white'}} align="center">First Name</TableCell>
+                    <TableCell style={{color: 'white'}} align="center">Last Name</TableCell>
+                  </TableRow>
+                </TableHead>
+            </Table>
+          </div>
+        </Paper>
+
+
         <Paper className={classes.root}>
           <div className={classes.tableWrapper}>
             <Table className={classes.table}>
@@ -136,8 +161,8 @@ const actionsStyles = theme => ({
                     <TableCell component="th" scope="row">
                       {row.id}
                     </TableCell>
-                    <TableCell align="right">{row.firstName}</TableCell>
-                    <TableCell align="right">{row.lastName}</TableCell>
+                    <TableCell align="center">{row.firstName}</TableCell>
+                    <TableCell align="center">{row.lastName}</TableCell>
                   </TableRow>
                 ))}
                 {emptyRows > 0 && (
@@ -146,26 +171,31 @@ const actionsStyles = theme => ({
                   </TableRow>
                 )}
               </TableBody>
-              <TableFooter>
-                <TableRow>
-                  <TablePagination
-                    rowsPerPageOptions={[5, 10, 25]}
-                    colSpan={3}
-                    count={rows.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    SelectProps={{
-                      native: true,
-                    }}
-                    onChangePage={this.handleChangePage}
-                    onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                    ActionsComponent={TablePaginationActionsWrapped}
-                  />
-                </TableRow>
-              </TableFooter>
             </Table>
           </div>
-        </Paper>
+      </Paper>
+      <Paper style={{ marginTop: '25px', textAlign: "right" }}>
+      <Table className={classes.table}>
+        <TableFooter>
+            <TableRow>
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 25]}
+                colSpan={3}
+                count={rows.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                SelectProps={{
+                  native: true,
+                }}
+                onChangePage={this.handleChangePage}
+                onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                ActionsComponent={TablePaginationActionsWrapped}
+              />
+            </TableRow>
+          </TableFooter>
+          </Table>
+      </Paper>
+      </div>
       );
     }
   }
