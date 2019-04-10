@@ -58,13 +58,12 @@ class ApplicationTabsComponent extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { value } = this.state;
+    // const { value } = this.state;
 
     return (
         <BrowserRouter>
             <div className={classes.root}>
-                    <Route 
-                    path = "/"
+                    <Route
                     render={({ location }) => (
                         <Fragment>
                             <AppBar position="static">
@@ -78,14 +77,13 @@ class ApplicationTabsComponent extends React.Component {
                                 </Toolbar>
                             </AppBar>
                             <Switch>
-                                <Route path="/userInformation" render={() => <div><UserInformation></UserInformation></div>} />
-                                <Route path="/materialTableExample" render={() => <div><MaterialUITableComponent></MaterialUITableComponent></div>} />
+                                <Route path="/userInformation" render={() => <TabContainer><UserInformation></UserInformation></TabContainer>} />
+                                <Route path="/materialTableExample" render={() => <TabContainer><MaterialUITableComponent></MaterialUITableComponent></TabContainer>} />
                             </Switch>
                         </Fragment>
                 )} />
             </div>
         </BrowserRouter>
-      
     );
   }
 }
