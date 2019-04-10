@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import KeyboardDatePicker from './KeyboardDatePicker';
 import * as moment from 'moment';
+import Button from '@material-ui/core/Button';
 
 class AppGlobalDateRangeComponent extends Component {
 
@@ -31,10 +32,12 @@ class AppGlobalDateRangeComponent extends Component {
         const { startDate, endDate } = this.props.mappedDateRangeState;
         console.log("START DATE : ", startDate);
           return (
-              <div style={{ display: "flex", justifyContent: 'flex-end', alignItems: 'center', marginRight: '20px', width: '300px' }}>
+              <div style={{ display: "flex", justifyContent: 'flex-end', alignItems: 'center', marginRight: '20px', width: '350px' }}>
                 <KeyboardDatePicker label="Start Date" selectedDate={startDate} changed={this.handleStartDateChange}></KeyboardDatePicker>
                 <span>-&nbsp;</span>
                 <KeyboardDatePicker label="End Date" selectedDate={endDate} changed={this.handleEndDateChange}></KeyboardDatePicker>
+                <span>&nbsp;&nbsp;</span>
+                <Button variant="contained" color="secondary">Submit</Button>
               </div>
             )
         }

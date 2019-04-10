@@ -127,6 +127,10 @@ const actionsStyles = theme => ({
       console.log(date);
       this.props.startDateChange(date);
     };
+
+    handleTableRowClick = (event) => {
+      console.log(event);
+    }
   
     render() {
       const { classes } = this.props;
@@ -137,7 +141,7 @@ const actionsStyles = theme => ({
       return (
         
       <div>
-        <Paper className={classes.root} style={{ marginTop: '-38px', backgroundColor: '#585eb1', boxShadow: 'none'}}>
+        <Paper className={classes.root} style={{ marginTop: '-32px', backgroundColor: '#585eb1', boxShadow: 'none'}}>
           <div className={classes.tableWrapper}>
             <Table className={classes.table}>
                 <TableHead>
@@ -174,7 +178,7 @@ const actionsStyles = theme => ({
             </Table>
           </div>
       </Paper>
-      <Paper style={{ marginTop: '25px', textAlign: "right" }}>
+      <div style={{ marginTop: '25px', textAlign: "right" }}>
       <Table className={classes.table}>
         <TableFooter>
             <TableRow>
@@ -194,7 +198,7 @@ const actionsStyles = theme => ({
             </TableRow>
           </TableFooter>
           </Table>
-      </Paper>
+      </div>
       </div>
       );
     }
