@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useDebugValue } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -9,12 +9,9 @@ import AppGlobalDateRange from '../containers/AppGlobalDateRange';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import UserInformation from '../containers/UserInformation';
-import { Switch, Route, Link, BrowserRouter } from "react-router-dom";
-import MaterialUITableComponent from './MaterialUITableComponent';
+import { Switch, Route, Link, BrowserRouter, Redirect } from "react-router-dom";
+import MaterialUITable from '../containers/MaterialUITable';
 
-import { Provider } from 'react-redux';
-import configureStore from '../store/configureStore';
-const store = configureStore();
 
 function TabContainer(props) {
   return (
@@ -50,46 +47,50 @@ const styles = theme => ({
 
 class ApplicationTabsComponent extends React.Component {
   state = {
-    value: 0,
+    value: '',
   };
 
   handleChange = (event, value) => {
-    this.setState({ value });
+    console.log(value);
+    this.setState({ value: value });
+    // this.props.history.push(value);
   };
+
+  // componentDidMount() {
+  //   this.setState({value: "/userInformation"});
+  //   console.log("HELLO");
+  // }
 
 
   render() {
     const { classes } = this.props;
-    // const { value } = this.state;
-
     return (
         <BrowserRouter>
-          
           <div className={classes.root}>
-                    <Route
-                    render={({ location }) => (
-                      <Provider store={store}>
-                        <div>
-                            <AppBar position="static">
-                                <Toolbar>
-                                    <Tabs value={location.pathname} onChange={this.handleChange} className={classes.grow} classes={{indicator: classes.tabsIndicator }}>
-                                        <Tab label="User Information" component={Link} to="/userInformation" />
-                                        <Tab label="Material UI Table Example" component={Link} to="/materialTableExample" />
-                                    </Tabs>
-                                    <AppGlobalDateRange></AppGlobalDateRange>
-                                    <Button color="inherit">Download Excel</Button>
-                                </Toolbar>
-                            </AppBar>
-                            <Switch>
-                                <Route path="/userInformation" render={() => <TabContainer><UserInformation></UserInformation></TabContainer>} />
-                                <Route path="/materialTableExample" render={() => <TabContainer><MaterialUITableComponent></MaterialUITableComponent></TabContainer>} />
-                            </Switch>
-                        </div>
-                        </Provider>
-                )} />
+            <Route
+            path="/"
+            render={({ location }) => (
+                <Fragment>
+                    <AppBar position="static">
+                        <Toolbar>
+                            <Tabs value={location.pathname} onChange={this.handleChange} className={classes.grow} classes={{indicator: classes.tabsIndicator }}>
+                                {/* <Tab value="/userInformation" label="" component={Link} to="/userInformation" /> */}
+                                <Tab value="/userInformation" label="User Information" component={Link} to="/userInformation" />
+                                <Tab value="/materialTableExample" label="Material UI Table Example" component={Link} to="/materialTableExample" />
+                            </Tabs>
+                            <AppGlobalDateRange></AppGlobalDateRange>
+                            <Button color="inherit">Download Excel</Button>
+                        </Toolbar>
+                    </AppBar>
+                    <Switch>
+                        {/* <Route path="/" render={() => <TabContainer><Redirect to="/userInformation" /></TabContainer>} /> */}
+                        <Route path="/userInformation" render={() => <TabContainer><UserInformation></UserInformation></TabContainer>} />
+                        <Route path="/materialTableExample" render={() => <TabContainer><MaterialUITable></MaterialUITable></TabContainer>} />
+                        <Redirect from='/' to='/userInformation' />
+                    </Switch>
+                </Fragment>
+              )} />
             </div>
-          
-            
         </BrowserRouter>
     );
   }

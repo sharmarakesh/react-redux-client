@@ -17,6 +17,7 @@ export default class UserInformation extends React.Component {
   // ];
 
   componentDidMount(){
+    console.log("[UserInformation > componentDidMount]");
     this.props.fetchUserInformation();
   }
 

@@ -111,6 +111,7 @@ const actionsStyles = theme => ({
   class MaterialUITableComponent extends Component {
 
     componentDidMount() {
+        console.log("[MaterialUITableComponent > componentDidMount]");
         this.props.fetchTableData();
     }
   
@@ -133,6 +134,7 @@ const actionsStyles = theme => ({
     }
   
     render() {
+      console.log(this.props.mappedTableState);
       const { classes } = this.props;
       const { tablesData, rowsPerPage, page, startDate } = this.props.mappedTableState;
       const rows = tablesData;
