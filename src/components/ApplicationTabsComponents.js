@@ -10,9 +10,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import UserInformation from '../containers/UserInformation';
 import { Switch, Route, Link, BrowserRouter } from "react-router-dom";
-
-import MaterialUITable from '../containers/MaterialUITable';
 import MaterialUITableComponent from './MaterialUITableComponent';
+
+import { Provider } from 'react-redux';
+import configureStore from '../store/configureStore';
+const store = configureStore();
 
 function TabContainer(props) {
   return (
@@ -62,10 +64,12 @@ class ApplicationTabsComponent extends React.Component {
 
     return (
         <BrowserRouter>
-            <div className={classes.root}>
+          
+          <div className={classes.root}>
                     <Route
                     render={({ location }) => (
-                        <Fragment>
+                      <Provider store={store}>
+                        <div>
                             <AppBar position="static">
                                 <Toolbar>
                                     <Tabs value={location.pathname} onChange={this.handleChange} className={classes.grow} classes={{indicator: classes.tabsIndicator }}>
@@ -80,9 +84,12 @@ class ApplicationTabsComponent extends React.Component {
                                 <Route path="/userInformation" render={() => <TabContainer><UserInformation></UserInformation></TabContainer>} />
                                 <Route path="/materialTableExample" render={() => <TabContainer><MaterialUITableComponent></MaterialUITableComponent></TabContainer>} />
                             </Switch>
-                        </Fragment>
+                        </div>
+                        </Provider>
                 )} />
             </div>
+          
+            
         </BrowserRouter>
     );
   }

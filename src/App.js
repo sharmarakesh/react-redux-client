@@ -20,7 +20,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div>
-          <ApplicationTabsComponents></ApplicationTabsComponents>
+          <ApplicationTabsComponents storeData={store}></ApplicationTabsComponents>
         </div>
       </Provider>
     );
