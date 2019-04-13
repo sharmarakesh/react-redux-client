@@ -14,6 +14,7 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
+import Collapse from '@material-ui/core/Collapse';
 
 const actionsStyles = theme => ({
     root: {
@@ -170,10 +171,11 @@ const actionsStyles = theme => ({
                     <TableCell align="center">{row.firstName}</TableCell>
                     <TableCell align="center">{row.lastName}</TableCell>
                   </TableRow>
+                  
                 ))}
                 {emptyRows > 0 && (
-                  <TableRow style={{ height: 48 * emptyRows }}>
-                    <TableCell colSpan={6} />
+                  <TableRow style={{ height: 48 * emptyRows, margin: '10px 0'}}>
+                    <TableCell colSpan={3} />
                   </TableRow>
                 )}
               </TableBody>

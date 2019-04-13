@@ -19,9 +19,9 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div>
+        {/* <div> */}
           <ApplicationTabsComponents storeData={store}></ApplicationTabsComponents>
-        </div>
+        {/* </div> */}
       </Provider>
     );
   }
