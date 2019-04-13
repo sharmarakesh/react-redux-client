@@ -19,7 +19,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchTableData: () => dispatch(materiaTableActions.fetchTableData()),
     setPage: (event, page) => dispatch(materiaTableActions.setPage(event, page)),
     changeRowsPerPage: (page, rowsPerPage) => dispatch(materiaTableActions.changeRowsPerPage(page, rowsPerPage)),
-    startDateChange: (date) => dispatch(materiaTableActions.changeStartDate(date))
+    startDateChange: (date) => dispatch(materiaTableActions.changeStartDate(date)),
+    toggleCromiumWindow: (id, isCollaspable) => dispatch(materiaTableActions.toggleChromiumWindow(id, isCollaspable))
   }
 }
 

@@ -4,7 +4,8 @@ const INITIAL_STATE = {
         firstName: null,
         lastName: null,
         phoneNumbers: [],
-        pincode: null
+        pincode: null,
+        collapsedRow: true
     }],
     page: 0,
     rowsPerPage: 5,
@@ -25,7 +26,13 @@ export const materialUITableReducer = (currentState = INITIAL_STATE, action) => 
                return {...currentState, isFetching: true}; 
 
         case 'FETCH_TABLE_FULLFILLED':
-            return {...currentState, isFetching: false, isFetched: true, tablesData: action.payload}
+            const newState1 = {...currentState};
+                newState1.tablesData = action.payload;
+                newState1.tablesData.map((item) => {
+                    item.collapsedRow = false;
+                    return item;
+                });
+            return {...newState1, isFetching: false, isFetched: true}
         
         case 'FETCH_TABLE_REJECTED':
             return {...currentState, isFetching: false, error: action.payload}
@@ -38,6 +45,18 @@ export const materialUITableReducer = (currentState = INITIAL_STATE, action) => 
         
         case 'CHANGE_START_DATE':
             return {...currentState, startDate: {startDate: action.payload.date}}
+
+        case 'TOGGLE_CHROMIUM_WINDOW': 
+            const newState = {...currentState};
+            newState.tablesData[action.payload.index-1].collapsedRow = action.payload.collapsedRow;
+            // newState.tablesData.map((item, idx) => {
+            //     // item.collapsedRow = false;
+            //     if ( idx === action.payload.index - 1 ) {
+            //         item.collapsedRow = action.payload.collapsedRow
+            //     }
+            //     return item;
+            // });
+            return {...newState}
 
         default:
         return currentState;

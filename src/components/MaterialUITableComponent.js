@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -15,6 +15,8 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import Collapse from '@material-ui/core/Collapse';
+import SimpleCard from './SimpleCard';
+import collapseComponent from './CollaspeComponent';
 
 const actionsStyles = theme => ({
     root: {
@@ -107,6 +109,18 @@ const actionsStyles = theme => ({
     tableWrapper: {
       overflowX: 'auto',
     },
+    tableRow: {
+      borderRadius: '4px', 
+      borderSpacing: '1em .5em',
+      borderBottom: '5px solid transparent',
+      borderTop: '1px solid rgba(224, 224, 224, 1)', 
+      borderLeft: '1px solid rgba(224, 224, 224, 1)',
+      borderRight: '1px solid rgba(224, 224, 224, 1)',
+      boxShadow: '0px 1px 5px 0px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 3px 1px -2px rgba(0,0,0,0.12)'
+    },
+    fragementMargin: {
+      marginTop: '10px'
+    }
   });
   
   class MaterialUITableComponent extends Component {
@@ -130,8 +144,9 @@ const actionsStyles = theme => ({
       this.props.startDateChange(date);
     };
 
-    handleTableRowClick = (event) => {
-      console.log(event);
+    handleTableRowClick = (id, isCollaspable) => {
+      console.log(id, isCollaspable);
+      this.props.toggleCromiumWindow(id, !isCollaspable);
     }
   
     render() {
@@ -158,19 +173,33 @@ const actionsStyles = theme => ({
           </div>
         </Paper>
 
-
-        <Paper className={classes.root}>
+        {/* style={{ boxShadow: 'none' }} */}
+        <Paper className={classes.root} style={{ boxShadow: 'none' }}>
           <div className={classes.tableWrapper}>
             <Table className={classes.table}>
               <TableBody>
                 {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => (
-                  <TableRow key={row.id}>
+                    <Fragment key={row.id}>
+                    <TableRow className={classes.tableRow}
+                    onClick={() => this.handleTableRowClick(row.id, row.collapsedRow)}>
                     <TableCell component="th" scope="row">
                       {row.id}
                     </TableCell>
                     <TableCell align="center">{row.firstName}</TableCell>
                     <TableCell align="center">{row.lastName}</TableCell>
                   </TableRow>
+                  {/* <TableRow style={{ border: 'none' }}> */}
+                    <Collapse
+                  in={row.collapsedRow}
+                  timeout="auto"
+                  component={collapseComponent}
+                  unmountOnExit
+              >
+                  {'some content to be collapse'}
+              </Collapse>
+                  {/* </TableRow> */}
+                    </Fragment>
+                    
                   
                 ))}
                 {emptyRows > 0 && (
@@ -179,6 +208,14 @@ const actionsStyles = theme => ({
                   </TableRow>
                 )}
               </TableBody>
+              {/* <Collapse
+                  in={this.state.collapsedRow}
+                  timeout="auto"
+                  component={collapseComponent}
+                  unmountOnExit
+              >
+                  {'some content to be collapse'}
+              </Collapse> */}
             </Table>
           </div>
       </Paper>

@@ -55,3 +55,11 @@ export const changeStartDate = ( date ) => {
         payload: {date: date}
     }
 }
+
+export const toggleChromiumWindow = ( id, isCollaspable ) => {
+    console.log('In action : ', id, isCollaspable);
+    return {
+        type: 'TOGGLE_CHROMIUM_WINDOW',
+        payload: {index: id, collapsedRow: isCollaspable}
+    }
+}
