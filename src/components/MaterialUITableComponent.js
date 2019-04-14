@@ -109,9 +109,13 @@ const actionsStyles = theme => ({
     tableWrapper: {
       overflowX: 'auto',
     },
+    tableRowGap: {
+      borderCollapse: 'separate',
+      // borderSpacing: '0 20px'
+      marginBottom: '10px'
+    },
     tableRow: {
-      borderRadius: '4px', 
-      borderSpacing: '1em .5em',
+      borderRadius: '4px',
       borderBottom: '5px solid transparent',
       borderTop: '1px solid rgba(224, 224, 224, 1)', 
       borderLeft: '1px solid rgba(224, 224, 224, 1)',
@@ -175,8 +179,8 @@ const actionsStyles = theme => ({
 
         {/* style={{ boxShadow: 'none' }} */}
         <Paper className={classes.root} style={{ boxShadow: 'none' }}>
-          <div className={classes.tableWrapper}>
-            <Table className={classes.table}>
+          <div className={[classes.tableWrapper].join(' ')}>
+            <Table className={[classes.table, classes.tableRowGap].join(' ')}>
               <TableBody>
                 {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => (
                     <Fragment key={row.id}>
@@ -188,34 +192,23 @@ const actionsStyles = theme => ({
                     <TableCell align="center">{row.firstName}</TableCell>
                     <TableCell align="center">{row.lastName}</TableCell>
                   </TableRow>
-                  {/* <TableRow style={{ border: 'none' }}> */}
                     <Collapse
-                  in={row.collapsedRow}
-                  timeout="auto"
-                  component={collapseComponent}
-                  unmountOnExit
-              >
-                  {'some content to be collapse'}
-              </Collapse>
-                  {/* </TableRow> */}
-                    </Fragment>
-                    
-                  
+                      in={row.collapsedRow}
+                      timeout="auto"
+                      component={collapseComponent}
+                      unmountOnExit>
+                      {'some content to be collapse'}
+                      </Collapse>
+                      <tr><td colSpan={3} style={{color: 'transparent', height: '15px'}}></td></tr>
+                  </Fragment>
+
                 ))}
                 {emptyRows > 0 && (
                   <TableRow style={{ height: 48 * emptyRows, margin: '10px 0'}}>
-                    <TableCell colSpan={3} />
+                    <TableCell colSpan={3} style={{marginTop: '30px'}}/>
                   </TableRow>
                 )}
-              </TableBody>
-              {/* <Collapse
-                  in={this.state.collapsedRow}
-                  timeout="auto"
-                  component={collapseComponent}
-                  unmountOnExit
-              >
-                  {'some content to be collapse'}
-              </Collapse> */}
+              </TableBody>  
             </Table>
           </div>
       </Paper>
