@@ -1,5 +1,5 @@
 import React from 'react';
-import zIndex from '@material-ui/core/styles/zIndex';
+// https://github.com/mui-org/material-ui/issues/4476
 
 const classes ={
     collaspeCard: {
