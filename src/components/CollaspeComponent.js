@@ -4,11 +4,10 @@ import zIndex from '@material-ui/core/styles/zIndex';
 const classes ={
     collaspeCard: {
         textAlign: 'center',
-        margin: '0 30px',
     },
     dataElem: {
-        margin: '-5px 10px 15px 10px',
-        padding: '15px',
+        margin: '-10px 10px 5px 10px',
+        padding: '20px 10px',
         border: '1px solid #eee',
         borderRadius: '8px',
         backgroundColor: '#cce7ff'
