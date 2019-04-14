@@ -156,7 +156,7 @@ const actionsStyles = theme => ({
     render() {
       console.log(this.props.mappedTableState);
       const { classes } = this.props;
-      const { tablesData, rowsPerPage, page, startDate } = this.props.mappedTableState;
+      const { tablesData, rowsPerPage, page } = this.props.mappedTableState;
       const rows = tablesData;
       const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
     

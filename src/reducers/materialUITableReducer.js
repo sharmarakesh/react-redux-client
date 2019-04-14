@@ -49,13 +49,6 @@ export const materialUITableReducer = (currentState = INITIAL_STATE, action) => 
         case 'TOGGLE_CHROMIUM_WINDOW': 
             const newState = {...currentState};
             newState.tablesData[action.payload.index-1].collapsedRow = action.payload.collapsedRow;
-            // newState.tablesData.map((item, idx) => {
-            //     // item.collapsedRow = false;
-            //     if ( idx === action.payload.index - 1 ) {
-            //         item.collapsedRow = action.payload.collapsedRow
-            //     }
-            //     return item;
-            // });
             return {...newState}
 
         default:
